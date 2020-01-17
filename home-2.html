@@ -1,0 +1,78 @@
+
+<html>
+<head>
+	<title></title>
+</head>
+
+<body>
+
+	<div id="root">
+		<p>To explain v-on click and all...</p>
+		<div >
+			{{ message }}
+		</div>
+		<input type="text" v-model="message" v-on:keyup.enter="addTodo"> 
+		<button v-on:click="filter"> Filter</button>
+		
+		<div>
+			{{ isFiltered }}
+		</div>
+
+		<div v-bind:class="{hide:!isFiltered}">
+				Hello RAmcccs
+
+		</div>
+		
+		<div v-bind:class="{hide:isFiltered}">
+			<ol>
+				<li v-for="todo in Todos">
+	      			{{todo.name}}
+	    		</li>
+			</ol>
+			
+
+
+		</div>
+		
+	</div>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script>
+		
+		new Vue({
+
+			el: "#root",
+			data:{ 
+				message:"Hello",
+				Todos:[],
+				isFiltered:false,
+
+			},
+			methods: {
+
+				addTodo:function(){
+
+					this.Todos.push({name:this.message})
+      			this.message=''
+      			return
+				},
+				filter:function(){
+					this.isFiltered=!this.isFiltered
+					return
+				}
+
+			}
+		})
+	</script>
+<style>
+	
+	.hide{
+		/*color:red;*/
+		display: none;
+	}
+</style>
+
+
+</body>
+</html>

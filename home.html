@@ -1,0 +1,48 @@
+
+<html>
+<head>
+	<title></title>
+</head>
+
+<body>
+
+	<div id="root">
+		<p>To explain bind</p>
+		<div >
+			{{ message }}
+		</div>
+		<input type="text" v-model="message" v-on:keyup.enter="addTodo">
+		<ol>
+			<li v-for="todo in Todos">
+      			{{todo.name}}
+    		</li>
+		</ol>
+	</div>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script>
+		
+		new Vue({
+
+			el: "#root",
+			data:{ 
+				message:"Hello",
+				Todos:[]
+
+			},
+			methods: {
+
+				addTodo:function(){
+					this.Todos.push({name:this.message})
+      			this.message=''
+      			return
+				}
+			}
+		})
+	</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+
+
+<html>
+<head>
+	<title></title>
+</head>
+
+<body>
+
+	<div id="root">
+
+		<ol>
+			<li>if filter is clicked new block apperas</li>
+			<li>less than 2 charcter is not allowed</li>
+			<li>error message appers when less than 2 char apperared</li>
+		</ol>
+		
+		
+		<input v-if="seen" type="text" v-model="message" v-on:keyup.enter="addTodo"> 
+		<button v-on:click="filter">Filter</button>
+
+
+		<div v-if="iferr" class="err">
+			{{ err }}
+		</div>
+
+		
+		<div>
+			{{ isFiltered }}
+		</div></br>
+
+		<div v-bind:class="{hide:!isFiltered}">
+				Hello RAmcccs
+
+		</div>
+
+
+		<div v-bind:class="{hide:isFiltered}">
+			<ol>
+				<li v-for="todo in Todos">
+	      			{{todo.name}}
+	    		</li>
+			</ol>
+			
+
+
+		</div>
+		
+	</div>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script>
+		
+		var root = new Vue({
+
+			el: "#root",
+			data:{ 
+				message:"Hello",
+				Todos:[],
+				// seen:true,
+				seen:false,
+				isFiltered:false,
+				err:"",
+				// filter:"Filter",
+				iferr:false,
+				// indexing:false,
+
+			},
+			methods: {
+
+				addTodo:function(){
+					if (this.message.length<2){
+						this.err="less than one char..."
+						this.iferr= true
+						return 
+					}
+					this.Todos.push({name:this.message})
+					this.iferr= false
+      			    this.message=''
+      			return
+				},
+
+				filter:function(){
+					this.Todos.push({name:"this.message"})
+					this.isFiltered = !this.isFiltered
+					return
+				}
+
+			}
+		})
+	</script>
+<style>
+	
+	.hide{
+		/*color:red;*/
+		display: none;
+	}
+
+	.err{
+		font-size: 10px;
+		color:red;
+	}
+</style>
+
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+
+<html>
+<head>
+	<title></title>
+</head>
+
+<body>
+
+	<div id="root">
+		<p>To explain v-on click and all...</p>
+		<div >
+			{{ message }}
+		</div>
+		<input type="text" v-model="message" v-on:keyup.enter="addTodo"> 
+		<button v-on:click="filter"> Filter</button>
+		<!-- <button v-on:click="filter"> {{filter}}</button> -->
+		
+		<div>
+			{{ isFiltered }}
+		</div>
+
+
+		<div v-if="iferr" class="err">
+			{{ err }}
+		</div>
+
+		<div v-bind:class="{hide:!isFiltered}">
+				Hello RAmcccs
+
+		</div>
+		
+		<div v-bind:class="{hide:isFiltered}">
+			<ol>
+				<li v-for="todo in Todos">
+	      			{{todo.name}}
+	    		</li>
+			</ol>
+			
+
+
+		</div>
+		
+	</div>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script>
+		
+		new Vue({
+
+			el: "#root",
+			data:{ 
+				message:"Hello",
+				Todos:[],
+				err:"",
+				// filter:"Filtedewdr",
+				iferr:false,
+				isFiltered:false,
+
+			},
+			methods: {
+
+				addTodo:function(){
+					if (this.message.length<2){
+						this.err="less than one char..."
+						this.iferr= true
+						return 
+					}
+
+					this.Todos.push({name:this.message})
+					this.iferr= false
+      			this.message=''
+      			return
+				},		
+				filter:function(){
+					// this.Todos.push({name:"this.message"})
+					this.isFiltered=!this.isFiltered
+					return
+				}
+
+			}
+		})
+	</script>
+<style>
+	
+	.hide{
+		/*color:red;*/
+		display: none;
+	}
+
+	.err{
+		font-size: 10px;
+		color:red;
+	}
+</style>
+
+
+</body>
+</html>
